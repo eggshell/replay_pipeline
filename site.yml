@@ -1,6 +1,6 @@
 ---
 - name: Setup StarCraft II host
-  hosts: sc2_host
+  hosts: windows
   tags: ['sc2_host', 'windows']
   roles:
     - role: sc2_host
