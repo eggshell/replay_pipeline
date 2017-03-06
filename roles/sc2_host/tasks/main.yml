@@ -1,0 +1,14 @@
+---
+- name: Upgrade to PowerShell >=3 if not already
+  script: upgrade_to_ps3.ps1
+
+- name: Check if StarCraft2 is installed
+  script: Get-ItemProperty {{ starcraft_registry_path }} | select DisplayName | sls {{ starcraft_search_pattern }}
+  register: starcraft_installed
+  failed_when: "{{ starcraft_display_name }} not in {{ starcraft_installed.stdout }}"
+
+## TODO: Figure out winscp equivalent
+#- name: Copy watch script to windows host
+#
+## TODO: write powershell script for watching replay dir
+#- name: Start watching for SC2Replay files

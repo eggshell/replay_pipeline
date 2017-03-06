@@ -1,0 +1,4 @@
+---
+starcraft_display_name: '@{DisplayName=Starcraft II}'
+starcraft_registry_path: 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*' 
+starcraft_search_pattern: 'Starcraft II'
