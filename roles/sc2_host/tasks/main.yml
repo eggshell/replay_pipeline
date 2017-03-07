@@ -1,4 +1,7 @@
 ---
+- name: Ensure execution policy
+  script: powershell.exe Set-ExecutionPolicy Unrestricted
+
 - name: Upgrade to PowerShell >=3 if not already
   script: upgrade_to_ps3.ps1
 
@@ -7,8 +10,15 @@
   register: starcraft_installed
   failed_when: 'starcraft_display_name not in starcraft_installed.stdout'
 
-## TODO: Figure out winscp equivalent
-#- name: Copy watch script to windows host
-#
-## TODO: write powershell script for watching replay dir
-#- name: Start watching for SC2Replay files
+- name: Ensure scripts directory exists
+  win_file:
+    path: "{{ scripts_dir }}"
+    state: directory
+
+- name: Copy watch script to windows host
+  win_template:
+    src: watch_for_replays.ps1
+    dest: "{{ scripts_dir }}\watch_for_replays.ps1"
+
+- name: Start watching for SC2Replay files
+  script: "{{ scipts_dir }}\watch_for_replays.ps1"
