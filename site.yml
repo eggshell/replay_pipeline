@@ -4,3 +4,9 @@
   tags: ['sc2_host', 'windows']
   roles:
     - role: sc2_host
+
+- name: Setup Replay Processing host
+  hosts: replay_processing
+  tags: ['replay_processing', 'replay_proc']
+  roles:
+    - role: replay_proc
