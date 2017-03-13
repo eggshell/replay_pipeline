@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source /opt/venvs/replays/bin/activate
-source /opt/scripts/openrc.sh
+source /opt/replays/scripts/openrc.sh
 
 swift download -D /opt/replays/replays_unprocessed replays_unprocessed
 

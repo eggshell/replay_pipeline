@@ -40,6 +40,7 @@
     src: "opt/replays/scripts/{{ item }}"
     dest: "/opt/replays/scripts/{{ item }}"
   with_items:
+    - openrc.sh
     - pull-replays.sh
     - process-replays.sh
     - push-replays.sh
