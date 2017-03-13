@@ -2,20 +2,62 @@
 - name: Ensure execution policy
   script: powershell.exe Set-ExecutionPolicy Unrestricted
 
-- name: Upgrade to PowerShell >=3 if not already
+- name: Upgrade to PowerShell >=3
   script: upgrade_to_ps3.ps1
 
-- name: Check if StarCraft2 is installed
+- name: Check for StarCraft II installation
   raw: 'Get-ItemProperty {{ starcraft_registry_path }} | select DisplayName | sls {{ starcraft_display_name }}'
   register: starcraft_installed
   failed_when: 'starcraft_display_name not in starcraft_installed.stdout'
+
+- name: Check for Python2.7 installation
+  raw: 'Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall | select DisplayName | sls Python'
+  register: python_installed
+
+- name: Fetch Python2.7 installer
+  win_get_url:
+    url: "https://www.python.org/ftp/python/2.7.13/python-2.7.13.amd64.msi"
+    dest: "{{ downloads_path }}"
+  when: 'Python not in python_installed.stdout'
+
+- name: Install Python2.7
+  script: "Start-Process msiexec.exe -Wait -ArgumentList '/I {{ downloads_path }}\python-2.7.13.amd64.msi /quiet"
+  when: 'Python not in python_installed.stdout'
+
+# TODO: rethink conditional on next three tasks
+- name: Fetch get-pip.py
+  win_get_url:
+    url: "https://bootstrap.pypa.io/get-pip.py"
+    dest: "{{ downloads_path }}"
+  when: 'Python not in python_installed.stdout'
+
+- name: Run get-pip.py
+  script: "python {{ downloads_path }}\get-pip.py"
+  when: 'Python not in python_installed.stdout'
+
+- name: Install pip packages
+  script: "pip install pbr python-keystoneclient python-swiftclient"
+  when: 'Python not in python_installed.stdout'
 
 - name: Ensure scripts directory exists
   win_file:
     path: "{{ scripts_dir }}"
     state: directory
 
-- name: Copy watch script to windows host
+- name: Create openrc file on windows host
+  win_template:
+    src: openrc.sh
+    dest: "{{ scripts_dir }}\openrc.sh"
+
+- name: Create openrc interpreter on windows host
+  win_template:
+    src: source-openrc.ps1
+    dest: "{{ scripts_dir }}\source-openrc.ps1"
+
+- name: Set openstack environment variables
+  script: "{{ scripts_dir }}\source-openrc.ps1 {{ scripts_dir }}\openrc.sh"
+
+- name: Create watch script on windows host
   win_template:
     src: watch_for_replays.ps1
     dest: "{{ scripts_dir }}\watch_for_replays.ps1"

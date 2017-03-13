@@ -5,6 +5,8 @@ $sb={
      # TODO make this a REST API call pushing to object storage container
      Write-Host "The file $name was $changeType at $timeStamp" -fore green
      $event
+     swift auth
+     swift upload replays_unprocessed $name
 }
 
 $fsw=New-Object IO.FileSystemWatcher('{{ replays_dir }}', '*.SC2Replay*')
