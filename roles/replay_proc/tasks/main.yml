@@ -1,0 +1,75 @@
+---
+- name: Ensure venv directory
+  file:
+    path: /opt/venvs
+    state: directory
+
+- name: Ensure pip
+  apt:
+    name: python-pip
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Ensure virtualenv
+  pip:
+    name: virtualenv
+    state: present
+
+- name: Ensure openstack clients
+  pip:
+    name: "{{ item }}"
+    state: present
+    virtualenv: /opt/venvs/replays
+  with_items:
+    - python-keystoneclient
+    - python-swiftclient
+
+#TODO: install replay_processing to replays virtualenv
+
+- name: Ensure directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /opt/scripts
+    - /opt/replays/replays_unprocessed
+    - /opt/replays/replays_processed
+
+- name: Ensure scripts
+  template:
+    src: "opt/replays/scripts/{{ item }}"
+    dest: "/opt/replays/scripts/{{ item }}"
+  with_items:
+    - pull-replays.sh
+    - process-replays.sh
+    - push-replays.sh
+
+- name: Ensure replay pull cron job
+  cron:
+    name: "Pull replay files from object store"
+    minute: *
+    hour: *
+    month: *
+    day: *
+    weekday: *
+    job: "/opt/replays/scripts/pull-replays.sh"
+
+- name: Ensure replay processing cron job
+  cron:
+    name: "Process replays locally"
+    minute: *
+    hour: *
+    month: *
+    day: *
+    weekday: *
+    job: "/opt/replays/scripts/process-replays.sh"
+
+- name: Ensure replay push cron job
+  cron:
+    name: "Push replays to watson analytics"
+    minute: *
+    hour: *
+    month: *
+    day: *
+    weekday: *
+    job: "/opt/replays/scripts/push-replays.sh"
