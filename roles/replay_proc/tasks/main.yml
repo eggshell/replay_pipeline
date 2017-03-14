@@ -23,8 +23,7 @@
   with_items:
     - python-keystoneclient
     - python-swiftclient
-
-#TODO: install replay_processing to replays virtualenv
+    - git+https://github.com/nibalizer/replay_processing.git
 
 - name: Ensure directories
   file:
@@ -48,29 +47,14 @@
 - name: Ensure replay pull cron job
   cron:
     name: "Pull replay files from object store"
-    minute: *
-    hour: *
-    month: *
-    day: *
-    weekday: *
     job: "/opt/replays/scripts/pull-replays.sh"
 
 - name: Ensure replay processing cron job
   cron:
     name: "Process replays locally"
-    minute: *
-    hour: *
-    month: *
-    day: *
-    weekday: *
     job: "/opt/replays/scripts/process-replays.sh"
 
 - name: Ensure replay push cron job
   cron:
     name: "Push replays to watson analytics"
-    minute: *
-    hour: *
-    month: *
-    day: *
-    weekday: *
     job: "/opt/replays/scripts/push-replays.sh"
