@@ -2,7 +2,7 @@
 - name: Ensure execution policy
   script: powershell.exe Set-ExecutionPolicy Unrestricted
 
-- name: Upgrade to PowerShell >=3
+- name: Ensure PowerShell>=3
   script: upgrade_to_ps3.ps1
 
 - name: Check for StarCraft II installation
@@ -35,29 +35,29 @@
   script: "python {{ downloads_path }}\get-pip.py"
   when: 'Python not in python_installed.stdout'
 
-- name: Install pip packages
+- name: Ensure pip packages
   script: "pip install pbr python-keystoneclient python-swiftclient"
   when: 'Python not in python_installed.stdout'
 
-- name: Ensure scripts directory exists
+- name: Ensure scripts directory
   win_file:
     path: "{{ scripts_dir }}"
     state: directory
 
-- name: Create openrc file on windows host
+- name: Ensure openrc file
   win_template:
     src: openrc.sh
     dest: "{{ scripts_dir }}\openrc.sh"
 
-- name: Create openrc interpreter on windows host
+- name: Ensure openrc interpreter
   win_template:
     src: source-openrc.ps1
     dest: "{{ scripts_dir }}\source-openrc.ps1"
 
-- name: Set openstack environment variables
+- name: Source openstack environment variables
   script: "{{ scripts_dir }}\source-openrc.ps1 {{ scripts_dir }}\openrc.sh"
 
-- name: Create watch script on windows host
+- name: Ensure watch script
   win_template:
     src: watch_for_replays.ps1
     dest: "{{ scripts_dir }}\watch_for_replays.ps1"
