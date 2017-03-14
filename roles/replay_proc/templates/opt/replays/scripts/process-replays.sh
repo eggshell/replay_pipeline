@@ -3,3 +3,5 @@
 source /opt/venvs/replays/bin/activate
 
 replayscan -R /opt/replays/replays_unprocessed >> /opt/replays/starcraft_data.csv
+
+mv /opt/replays/replays_unprocessed/*.csv /opt/replays/replays_processed

@@ -44,6 +44,12 @@
     - process-replays.sh
     - push-replay-data.sh
 
+- name: Ensure initial starcraft_replays.csv
+  copy:
+    src: opt/replays/starcraft_header.csv
+    dest: /opt/replays/starcraft_replays.csv
+    force: no
+
 - name: Ensure replay pull cron job
   cron:
     name: "Pull replay files from object store"
