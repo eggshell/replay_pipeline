@@ -6,9 +6,12 @@
 
 - name: Ensure pip
   apt:
-    name: python-pip
+    name: "{{ item }}"
     update_cache: yes
     cache_valid_time: 3600
+  with_items:
+    - python-pip
+    - jq
 
 - name: Ensure virtualenv
   pip:

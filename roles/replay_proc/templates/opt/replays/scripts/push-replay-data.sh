@@ -6,7 +6,7 @@ function refresh_token {
                -H "Content-Type: multipart/form-data"                       \
                -F "grant_type=refresh_token"                                \
                -F "refresh_token={{ watson_secrets.refresh_token }}"        \
-                  "https://api.ibm.com/watsonanalytics/run/oauth2/v1/token"
+                  "{{ auth_link }}"
 }
 
 function main {

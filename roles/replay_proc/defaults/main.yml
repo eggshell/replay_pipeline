@@ -2,7 +2,7 @@
 watson_secrets:
   client_id: "default"
   client_secret: "default"
-  authorization_code: "default"
+  refresh_token: "default"
   access_token: "default"
   dataset_id: "default"
 
