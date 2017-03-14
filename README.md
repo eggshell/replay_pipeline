@@ -1,10 +1,12 @@
 # replay_pipeline
 
-Playbooks to deploy multi-node pipeline for Starcraft 2 replay processing.
+Playbooks to deploy multi-node pipeline for Starcraft II replay processing.
 
 ## Overview
 
-TODO: Put high-level architectural diagram here.
+<p align="center">
+  <img src="https://github.com/eggshell/replay_pipeline/blob/master/replay_pipeline.png?raw=true" alt="Replay Pipeline Diagram"/>
+</p>
 
 ## Requirements
 
