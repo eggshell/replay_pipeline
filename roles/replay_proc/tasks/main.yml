@@ -43,7 +43,7 @@
     - openrc.sh
     - pull-replays.sh
     - process-replays.sh
-    - push-replays.sh
+    - push-replay-data.sh
 
 - name: Ensure replay pull cron job
   cron:

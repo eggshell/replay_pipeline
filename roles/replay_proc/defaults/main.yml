@@ -1,0 +1,11 @@
+---
+watson_secrets:
+  client_id: "default"
+  client_secret: "default"
+  authorization_code: "default"
+  access_token: "default"
+  dataset_id: "default"
+
+base_api_link: "https://api.ibm.com/watsonanalytics/run"
+auth_link: "{{ base_api_link }}/oauth2/v1/token"
+dataset_link: "{{ base_api_link }}/data/v1/datasets"
