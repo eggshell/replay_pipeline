@@ -1,5 +1,6 @@
 ---
 starcraft_display_name: 'StarCraft'
+python_display_name: 'Python'
 starcraft_registry_path: 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*'
 python_registry_path: 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*'
 
