@@ -1,6 +1,6 @@
 ---
 - name: Ensure execution policy
-  script: powershell.exe Set-ExecutionPolicy Unrestricted
+  raw: powershell.exe Set-ExecutionPolicy Unrestricted
 
 - name: Ensure PowerShell>=3
   script: upgrade_to_ps3.ps1
@@ -18,26 +18,26 @@
   win_get_url:
     url: "https://www.python.org/ftp/python/2.7.13/python-2.7.13.amd64.msi"
     dest: "{{ downloads_path }}"
-  when: 'Python not in python_installed.stdout'
+  when: 'python_display_name not in python_installed.stdout'
 
 - name: Install Python2.7
-  script: "Start-Process msiexec.exe -Wait -ArgumentList '/I {{ downloads_path }}\python-2.7.13.amd64.msi /quiet"
-  when: 'Python not in python_installed.stdout'
+  raw: 'Start-Process msiexec.exe -Wait -ArgumentList /I {{ downloads_path }}\python-2.7.13.amd64.msi /quiet'
+  when: 'python_display_name not in python_installed.stdout'
 
 # TODO: rethink conditional on next three tasks
 - name: Fetch get-pip.py
   win_get_url:
     url: "https://bootstrap.pypa.io/get-pip.py"
     dest: "{{ downloads_path }}"
-  when: 'Python not in python_installed.stdout'
+  when: 'python_display_name not in python_installed.stdout'
 
 - name: Run get-pip.py
-  script: "python {{ downloads_path }}\get-pip.py"
-  when: 'Python not in python_installed.stdout'
+  raw: 'python {{ downloads_path }}\get-pip.py'
+  when: 'python_display_name not in python_installed.stdout'
 
 - name: Ensure pip packages
-  script: "pip install pbr python-keystoneclient python-swiftclient"
-  when: 'Python not in python_installed.stdout'
+  raw: 'pip install pbr python-keystoneclient python-swiftclient'
+  when: 'python_display_name not in python_installed.stdout'
 
 - name: Ensure scripts directory
   win_file:
@@ -47,20 +47,20 @@
 - name: Ensure openrc file
   win_template:
     src: openrc.sh
-    dest: "{{ scripts_dir }}\openrc.sh"
+    dest: '{{ scripts_dir }}\openrc.sh'
 
 - name: Ensure openrc interpreter
   win_template:
     src: source-openrc.ps1
-    dest: "{{ scripts_dir }}\source-openrc.ps1"
+    dest: '{{ scripts_dir }}\source-openrc.ps1'
 
 - name: Source openstack environment variables
-  script: "{{ scripts_dir }}\source-openrc.ps1 {{ scripts_dir }}\openrc.sh"
+  raw: 'powershell.exe {{ scripts_dir }}\source-openrc.ps1 {{ scripts_dir }}\openrc.sh'
 
 - name: Ensure watch script
   win_template:
     src: watch_for_replays.ps1
-    dest: "{{ scripts_dir }}\watch_for_replays.ps1"
+    dest: '{{ scripts_dir }}\watch_for_replays.ps1'
 
 - name: Start watching for SC2Replay files
-  script: "{{ scipts_dir }}\watch_for_replays.ps1"
+  raw: 'powershell.exe {{ scripts_dir }}\watch_for_replays.ps1'
