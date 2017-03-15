@@ -5,7 +5,5 @@ starcraft_registry_path: 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVe
 python_registry_path: 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*'
 
 drive_letter: 'C'
-account_number: 999999
-account_other: 'other'
 scripts_dir: '{{ drive_letter }}:\Documents\replays_scripts'
-replays_dir: '{{ drive_letter }}:\Documents\StarCraft II\Accounts\{{ account_number }}\{{ account_other }}\Replays'
+replays_dir: '{{ drive_letter }}:\Documents\StarCraft II\Accounts\'
