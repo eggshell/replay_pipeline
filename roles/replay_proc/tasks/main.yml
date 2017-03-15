@@ -18,7 +18,7 @@
     name: virtualenv
     state: present
 
-- name: Ensure openstack clients
+- name: Ensure pip packages
   pip:
     name: "{{ item }}"
     state: present

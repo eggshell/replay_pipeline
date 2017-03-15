@@ -11,7 +11,7 @@
   failed_when: 'starcraft_display_name not in starcraft_installed.stdout'
 
 - name: Check for Python2.7 installation
-  raw: 'Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall | select DisplayName | sls Python'
+  raw: 'Get-ItemProperty {{ python_registry_path }} | select DisplayName | sls Python'
   register: python_installed
 
 - name: Fetch Python2.7 installer
