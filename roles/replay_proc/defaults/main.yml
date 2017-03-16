@@ -3,7 +3,6 @@ watson_secrets:
   client_id: "default"
   client_secret: "default"
   refresh_token: "default"
-  access_token: "default"
   dataset_id: "default"
 
 base_api_link: "https://api.ibm.com/watsonanalytics/run"
