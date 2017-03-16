@@ -116,7 +116,7 @@ Else {
     }
 
     $os_auth_version = Select-String -Path $openrc -Pattern 'OS_AUTH_VERSION'
-    If ($os_identity_api_version) {
+    If ($os_auth_version) {
         $env:OS_AUTH_VERSION = ([string]($os_auth_version)).Split("=")[1].Replace("`"","")
     }
     Else {
