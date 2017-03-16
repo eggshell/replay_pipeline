@@ -26,14 +26,14 @@
   with_items:
     - python-keystoneclient
     - python-swiftclient
-    - git+https://github.com/nibalizer/replay_processing.git
+    - git+git://github.com/nibalizer/replay_processing.git#egg=replay_processing
 
 - name: Ensure directories
   file:
     path: "{{ item }}"
     state: directory
   with_items:
-    - /opt/scripts
+    - /opt/replays/scripts
     - /opt/replays/replays_unprocessed
     - /opt/replays/replays_processed
 
