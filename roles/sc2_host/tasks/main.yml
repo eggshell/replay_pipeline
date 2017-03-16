@@ -60,7 +60,7 @@
 - name: Ensure watch script
   win_template:
     src: watch_for_replays.ps1
-    dest: 'powershell.exe -File {{ scripts_dir }}\watch_for_replays.ps1 -WindowStyle Hidden'
+    dest: 'powershell.exe {{ scripts_dir }}\watch_for_replays.ps1'
 
 - name: Start watching for SC2Replay files
-  raw: 'powershell.exe {{ scripts_dir }}\watch_for_replays.ps1'
+  raw: 'powershell.exe -File {{ scripts_dir }}\watch_for_replays.ps1 -WindowStyle Hidden'
