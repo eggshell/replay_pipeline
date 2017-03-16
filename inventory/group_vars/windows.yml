@@ -1,6 +1,6 @@
 ---
-ansible_user: <your_windows_user>
-ansible_password: <your_windows_password>
+ansible_user: <your_windows_admin_user>
+ansible_password: <your_windows_admin_password>
 ansible_port: 5986
 ansible_connection: winrm
 ansible_winrm_server_cert_validation: ignore

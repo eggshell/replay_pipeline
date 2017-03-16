@@ -30,7 +30,9 @@ Playbooks to deploy multi-node pipeline for Starcraft II replay processing.
    pip install -r requirements.txt
    ```
 
-1. Fill out `inventory/hosts`, `inventory/group_vars/windows` and `inventory/group_vars/all.yml` with your secrets.
+1. Fill out `inventory/hosts` with your windows and linux ip addresses or hostnames that you want to point to.
+
+1. Fill out `inventory/group_vars/windows` and `inventory/group_vars/all.yml` with your BlueMix Object Storage and Watson Analytics secrets.
 
 1. Run `site.yml`:
 

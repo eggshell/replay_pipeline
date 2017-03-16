@@ -1,9 +1,16 @@
+---
 swift:
   identity_api_version: 3
   auth_version: 3
-  auth_url: <bluemix_auth_url>
-  user_id: <bluemix_user_id>
-  password: <bluemix_password>
-  project_id: <bluemix_project_id>
-  project_name: <bluemix_project_name>
-  region_name: <bluemix_region_name>
+  auth_url: "https://CHANGEME:5000.com"
+  user_id: "USERID_CHANGEME"
+  password: "PASSWORD_CHANGEME"
+  project_id: "PROJECTID_CHANGEME"
+  project_name: "PROJECTNAME_CHANGEME"
+  region_name: "REGION_CHANGEME"
+
+watson_secrets:
+  client_id: "CLIENTID_CHANGEME"
+  client_secret: "CLIENTSECRET_CHANGEME"
+  refresh_token: "REFRESH_TOKEN_CHANGEME"
+  dataset_id: "DATASETID_CHANGEME"
