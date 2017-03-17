@@ -1,9 +1,10 @@
 $sb={
+     $filepath = $Event.SourceEventArgs.FullPath
      $fullname = $Event.SourceEventArgs.Name
      $separator = [string[]]@("Multiplayer\")
      $name = $fullname.Split($separator, [System.StringSplitOptions]::RemoveEmptyEntries)[1]
-     {{ scipts_dir }}\source-openrc.ps1 {{ scripts_dir }}\replays_scripts\openrc.sh
-     swift upload replays_unprocessed $name
+     {{ scripts_dir }}\source-openrc.ps1 {{ scripts_dir }}\openrc.sh
+     swift upload --object-name $name replays_unprocessed $filepath
      $event
 }
 
