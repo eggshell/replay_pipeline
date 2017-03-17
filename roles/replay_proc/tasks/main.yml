@@ -31,7 +31,7 @@
 
 # TODO: Think about adding a conditional here to speed up subsequent runs
 - name: Ensure nibalizer/replay_processing requirements
-  shell: "pip install -r /opt/venvs/replays/src/"
+  shell: "pip install -r /opt/venvs/replays/src/replay-processing/requirements.txt"
 
 - name: Ensure directories
   file:
