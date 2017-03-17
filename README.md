@@ -59,4 +59,4 @@ and [open a pull request](https://github.com/eggshell/replay_pipeline/compare/).
 
 * Thanks to Ansible for the [upgrade_to_ps3.ps1](https://github.com/cchurch/ansible/blob/devel/examples/scripts/upgrade_to_ps3.ps1) script.
 * Thanks to naturalis for the [openrc interpreter](https://github.com/naturalis/powershell/blob/master/Source-OpenRC.ps1) script which was modified to fit the use case in this repo.
-* Thanks to IamMred, who answered [this forum post](https://social.technet.microsoft.com/Forums/scriptcenter/en-US/c75c7bbd-4e32-428a-b3dc-815d5c42fd36/powershell-check-folder-for-new-files?forum=ITCG) for out watch_for_replays.ps1 script.
+* Thanks to IamMred, who answered [this forum post](https://social.technet.microsoft.com/Forums/scriptcenter/en-US/c75c7bbd-4e32-428a-b3dc-815d5c42fd36/powershell-check-folder-for-new-files?forum=ITCG) for the base of our watch_for_replays.ps1 script, which was modified to fit the use case in this repo.
