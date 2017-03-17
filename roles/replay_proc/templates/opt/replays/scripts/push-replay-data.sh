@@ -16,7 +16,7 @@ function main {
               -H "X-IBM-Client-Secret: {{ watson_secrets.client_secret }}" \
               -H "Authorization: Bearer $access_token"                     \
               -H "Content-Type:text/csv"                                   \
-              -F "@/opt/replays/starcraft_data.csv"                        \
+              -F "data=@/opt/replays/starcraft_data.csv"                        \
                  "{{ dataset_link }}/{{ watson_secrets.dataset_id }}/content"
 }
 

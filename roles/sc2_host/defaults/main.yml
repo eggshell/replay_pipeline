@@ -7,3 +7,4 @@ python_registry_path: 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall
 drive_letter: 'C'
 scripts_dir: '{{ drive_letter }}:\Documents\replays_scripts'
 replays_dir: '{{ drive_letter }}:\Documents\StarCraft II\Accounts\'
+downloads_dir: '{{ drive_letter }}:\Downloads'

@@ -1,6 +1,8 @@
 $sb={
-     $name = $Event.SourceEventArgs.FullPath
-     swift auth
+     $fullname = $Event.SourceEventArgs.Name
+     $separator = [string[]]@("Multiplayer\")
+     $name = $fullname.Split($separator, [System.StringSplitOptions]::RemoveEmptyEntries)[1]
+     {{ scipts_dir }}\source-openrc.ps1 {{ scripts_dir }}\replays_scripts\openrc.sh
      swift upload replays_unprocessed $name
      $event
 }

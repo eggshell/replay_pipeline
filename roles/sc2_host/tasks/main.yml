@@ -17,22 +17,22 @@
 - name: Fetch Python2.7 installer
   win_get_url:
     url: "https://www.python.org/ftp/python/2.7.13/python-2.7.13.amd64.msi"
-    dest: "{{ downloads_path }}"
+    dest: '{{ downloads_dir }}\python-2.7.13.amd64.msi'
   when: 'python_display_name not in python_installed.stdout'
 
 - name: Install Python2.7
-  raw: 'Start-Process msiexec.exe -Wait -ArgumentList /I {{ downloads_path }}\python-2.7.13.amd64.msi /quiet'
+  raw: 'powershell.exe Start-Process {{ downloads_dir }}\python-2.7.13.amd64.msi /qn -Wait'
   when: 'python_display_name not in python_installed.stdout'
 
 # TODO: rethink conditional on next three tasks
 - name: Fetch get-pip.py
   win_get_url:
     url: "https://bootstrap.pypa.io/get-pip.py"
-    dest: "{{ downloads_path }}"
+    dest: '{{ downloads_dir }}\get-pip.py'
   when: 'python_display_name not in python_installed.stdout'
 
 - name: Run get-pip.py
-  raw: 'python {{ downloads_path }}\get-pip.py'
+  raw: 'python {{ downloads_dir }}\get-pip.py'
   when: 'python_display_name not in python_installed.stdout'
 
 - name: Ensure pip packages
@@ -60,7 +60,7 @@
 - name: Ensure watch script
   win_template:
     src: watch_for_replays.ps1
-    dest: 'powershell.exe {{ scripts_dir }}\watch_for_replays.ps1'
+    dest: '{{ scripts_dir }}\watch_for_replays.ps1'
 
 - name: Start watching for SC2Replay files
   raw: 'powershell.exe -File {{ scripts_dir }}\watch_for_replays.ps1 -WindowStyle Hidden'

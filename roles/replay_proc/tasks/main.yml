@@ -4,13 +4,13 @@
     path: /opt/venvs
     state: directory
 
-- name: Ensure pip
+- name: Ensure apt packages
   apt:
     name: "{{ item }}"
     update_cache: yes
     cache_valid_time: 3600
   with_items:
-    - python-pip
+    - python3-pip
     - jq
 
 - name: Ensure virtualenv
@@ -23,10 +23,15 @@
     name: "{{ item }}"
     state: present
     virtualenv: /opt/venvs/replays
+    virtualenv_python: python3.5
   with_items:
     - python-keystoneclient
     - python-swiftclient
     - git+git://github.com/nibalizer/replay_processing.git#egg=replay_processing
+
+# TODO: Think about adding a conditional here to speed up subsequent runs
+- name: Ensure nibalizer/replay_processing requirements
+  shell: "pip install -r /opt/venvs/replays/src/"
 
 - name: Ensure directories
   file:
@@ -41,17 +46,19 @@
   template:
     src: "opt/replays/scripts/{{ item }}"
     dest: "/opt/replays/scripts/{{ item }}"
+    mode: 0700
   with_items:
     - openrc.sh
     - pull-replays.sh
     - process-replays.sh
     - push-replay-data.sh
 
-- name: Ensure initial starcraft_replays.csv
-  copy:
-    src: opt/replays/starcraft_header.csv
-    dest: /opt/replays/starcraft_replays.csv
-    force: no
+# TODO: remove this after making sure it is not needed.
+#- name: Ensure initial starcraft_data.csv
+#  copy:
+#    src: opt/replays/starcraft_header.csv
+#    dest: /opt/replays/starcraft_data.csv
+#    force: no
 
 - name: Ensure replay pull cron job
   cron:
