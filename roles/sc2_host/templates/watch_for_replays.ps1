@@ -4,7 +4,7 @@ $sb={
      $separator = [string[]]@("Multiplayer\")
      $name = $fullname.Split($separator, [System.StringSplitOptions]::RemoveEmptyEntries)[1]
      {{ scripts_dir }}\source-openrc.ps1 {{ scripts_dir }}\openrc.sh
-     swift upload --object-name $name replays_unprocessed $filepath
+     swift upload --object-name $name starcraft_replays $filepath
      $event
 }
 

@@ -39,8 +39,7 @@
     state: directory
   with_items:
     - /opt/replays/scripts
-    - /opt/replays/replays_unprocessed
-    - /opt/replays/replays_processed
+    - /opt/replays/starcraft_replays
 
 - name: Ensure scripts
   template:
@@ -52,13 +51,6 @@
     - pull-replays.sh
     - process-replays.sh
     - push-replay-data.sh
-
-# TODO: remove this after making sure it is not needed.
-#- name: Ensure initial starcraft_data.csv
-#  copy:
-#    src: opt/replays/starcraft_header.csv
-#    dest: /opt/replays/starcraft_data.csv
-#    force: no
 
 - name: Ensure replay pull cron job
   cron:
